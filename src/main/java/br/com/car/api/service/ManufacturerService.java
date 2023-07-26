@@ -1,0 +1,45 @@
+package br.com.car.api.service;
+
+import br.com.car.api.dto.ManufacturerDto;
+import br.com.car.api.model.Manufacturer;
+import br.com.car.api.repository.ManufacturerRepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ManufacturerService {
+
+    @Autowired
+    ManufacturerRepository manufacturerRepository;
+
+    public ResponseEntity<Manufacturer> manufacturerAdd(ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer = manufacturerDto.toManufacturer();
+        String toUpperCase = manufacturer.getManufacturerName().toUpperCase();
+        manufacturer.setManufacturerName(toUpperCase);
+        Optional<Manufacturer> existManufacturer = manufacturerRepository.findByManufacturerName(toUpperCase);
+        if (existManufacturer.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+            return ResponseEntity.ok(manufacturerRepository.save(manufacturer));
+        }
+
+        public ResponseEntity<Manufacturer> getManufacturerById(Long id) {
+            Optional<Manufacturer> manufacturer = manufacturerRepository.findById(id);
+            if (manufacturer.isPresent()) {
+                return ResponseEntity.of(manufacturer);
+
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+}
