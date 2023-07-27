@@ -49,4 +49,16 @@ public class ManufacturerService {
         return manufacturerRepository.findAll(pageable).map(ManufacturerReturnDto::new);
         }
 
+    public ResponseEntity<Manufacturer> attManufacturer(Long id, ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturerSave = manufacturerRepository.findById(id).orElseThrow();
+        String toUpperCase = manufacturerDto.getManufacturerName().toUpperCase();
+        Optional<Manufacturer> existManufacturer = manufacturerRepository.findByManufacturerName(toUpperCase);
+        if (manufacturerDto.getCountry() != null) manufacturerSave.setCountry(manufacturerDto.getCountry());
+        if (existManufacturer.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        manufacturerSave.setManufacturerName(toUpperCase);
+        return ResponseEntity.ok(manufacturerRepository.save(manufacturerSave));
+    }
+
 }
