@@ -33,4 +33,9 @@ public class ManufacturerController {
         return manufacturerService.getAllManufacturer(pageable);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Manufacturer> attManufacturer(@PathVariable("id") Long id,@RequestBody ManufacturerDto manufacturerDto) {
+        return manufacturerService.attManufacturer(id, manufacturerDto);
+    }
+
 }

@@ -21,10 +21,10 @@ public class Manufacturer {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "manufacturer_name", unique = true, nullable = false)
+    @Column(name = "manufacturer_name")
     private String manufacturerName;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "country")
     private String country;
 
     @Column(name = "createdAt", updatable = false)
