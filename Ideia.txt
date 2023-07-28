@@ -19,7 +19,7 @@ API - Cadastro de carro
    NAO DEVE EXISTIR CORES COM MESMO NOME NO BANCO (nao pode ser case sensitive) ok
 
    -> Cadastro ok
-   -> Atualização --
+   -> Atualização ok
    -> Detalha (pega todas as infos) ok
    -> Listagem paginada com busca por nome (apenas nome, id) ok
 
@@ -27,7 +27,7 @@ API - Cadastro de carro
    * Data Cadastro ok
    * Data Atualicao ok
 
-- Tipo
+- Tipo --
 
    NAO DEVE EXISTIR TIPOS COM MESMO NOME NO BANCO (nao pode ser case sensitive)
 
