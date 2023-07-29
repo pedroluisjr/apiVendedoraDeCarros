@@ -27,20 +27,20 @@ API - Cadastro de carro
    * Data Cadastro ok
    * Data Atualicao ok
 
-- Tipo --
+- Tipo ok
 
    NAO DEVE EXISTIR TIPOS COM MESMO NOME NO BANCO (nao pode ser case sensitive)
 
-   -> Cadastro
-   -> Atualização
-   -> Detalha (pega todas as infos)
-   -> Listagem paginada com busca por nome tipo(apenas nome tipo, id)
+   -> Cadastro ok
+   -> Atualização ok
+   -> Detalha (pega todas as infos) ok
+   -> Listagem paginada com busca por nome tipo(apenas nome tipo, id) ok
 
-   * Nome Tipo (carro, moto, lancha, etc)
-   * Data Cadastro
-   * Data Atualicao
+   * Nome Tipo (carro, moto, lancha, etc) ok
+   * Data Cadastro ok
+   * Data Atualicao ok
 
-- Veiculo
+- Veiculo //TODO: Implementar veículos
    -> Cadastro
    -> Atualização
    -> Deleção
