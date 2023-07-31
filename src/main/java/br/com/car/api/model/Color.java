@@ -23,9 +23,6 @@ public class Color {
     @Column(name = "colorId")
     private Long colorId;
 
-    @OneToMany(mappedBy = "colorName")
-    private List<Vehicle> vehicle;
-
     @Column(name = "colorName")
     private String colorName;
 

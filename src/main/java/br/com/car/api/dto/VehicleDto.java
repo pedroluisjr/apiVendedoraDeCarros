@@ -20,9 +20,9 @@ public class VehicleDto {
     private int model;
     private String plate;
     private int occupants;
-    private Type typeName;
-    private Color colorName;
-    private Manufacturer manufacturerName;
+    private Long typeId;
+    private Long colorId;
+    private Long manufacturerId;
 
     public Vehicle toVehicle() {
         return new ModelMapper().map(this, Vehicle.class);

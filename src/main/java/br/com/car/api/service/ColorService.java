@@ -42,6 +42,11 @@ public class ColorService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    public Color getColorByIdInt(Long id) {
+        Optional<Color> existColor = colorRepository.findById(id);
+        return existColor.orElse(null);
+    }
+
     public ResponseEntity<Color> attColor(Long id, ColorDto colorDto) {
         Color colorSave = colorRepository.findById(id).orElseThrow();
         String toUpperCase = colorDto.getColorName().toUpperCase();

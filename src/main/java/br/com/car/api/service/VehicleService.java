@@ -1,6 +1,8 @@
 package br.com.car.api.service;
 
 import br.com.car.api.dto.VehicleDto;
+import br.com.car.api.model.Color;
+import br.com.car.api.model.Type;
 import br.com.car.api.model.Vehicle;
 import br.com.car.api.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,13 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
+    @Autowired
+    ColorService colorService; //fazer isso para os outros.
+
     public ResponseEntity<Vehicle> addVehicle(VehicleDto vehicleDto) {
         Vehicle vehicle = vehicleDto.toVehicle();
-        String toUpperCase = vehicleDto.getModelName().toUpperCase();
-        vehicle.setModelName(toUpperCase);
-        Optional<Vehicle> existVehicle = vehicleRepository.findByModelName(toUpperCase);
-        if (existVehicle.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        return ResponseEntity.ok(vehicle);
+        Color color = colorService.getColorByIdInt(vehicleDto.getColorId()); //Fazer isso para tipo e fabricante.
+        return null;
     }
 
 }

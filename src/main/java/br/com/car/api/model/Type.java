@@ -22,9 +22,6 @@ public class Type {
     @Column(name = "typeId")
     private Long typeId;
 
-    @OneToMany(mappedBy = "typeName")
-    private List<Vehicle> vehicle;
-
     @Column(name = "typeName")
     private String typeName;
 

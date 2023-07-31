@@ -22,9 +22,6 @@ public class Manufacturer {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "manufacturerName")
-    private List<Vehicle> vehicle;
-
     @Column(name = "manufacturer_name")
     private String manufacturerName;
 
