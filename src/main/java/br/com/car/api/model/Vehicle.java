@@ -40,15 +40,15 @@ public class Vehicle {
     private int occupants;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "typeName")
+    @JoinColumn(name = "type_id")
     private Type typeName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "colorName")
+    @JoinColumn(name = "color_id")
     private Color colorName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manufacturerName")
+    @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturerName;
 
     @Column(name = "createdAt")

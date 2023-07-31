@@ -7,7 +7,7 @@ spring:
     show-sql: true
     generate-ddl: false
     hibernate:
-      ddl-auto: update #validate - update - none - create - create-drop
+      ddl-auto: create #validate - update - none - create - create-drop
       default_schema: public
   datasource:
     driverClassName: org.postgresql.Driver

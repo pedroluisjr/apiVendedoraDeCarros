@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +21,9 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "typeId")
     private Long typeId;
+
+    @OneToMany(mappedBy = "typeName")
+    private List<Vehicle> vehicle;
 
     @Column(name = "typeName")
     private String typeName;
