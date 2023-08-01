@@ -4,11 +4,12 @@ import br.com.car.api.dto.VehicleDto;
 import br.com.car.api.model.Vehicle;
 import br.com.car.api.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/veiculo")
@@ -18,8 +19,18 @@ public class VehicleController {
     VehicleService vehicleService;
 
     @PostMapping
-    public ResponseEntity<Vehicle> addVehicle(@RequestBody VehicleDto vehicleDto) {
+    public ResponseEntity<Vehicle> addVehicle(@Valid @RequestBody VehicleDto vehicleDto) {
         return vehicleService.addVehicle(vehicleDto);
+    }
+
+    @GetMapping
+    public Page<VehicleDto> getVehicle(Pageable pageable) {
+        return vehicleService.getVehicle(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Vehicle> getVehicleById(@PathVariable("id") Long id) {
+        return vehicleService.getVehicleById(id);
     }
 
 }

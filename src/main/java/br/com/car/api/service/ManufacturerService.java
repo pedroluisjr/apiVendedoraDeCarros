@@ -45,19 +45,25 @@ public class ManufacturerService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
+    public Optional<Manufacturer> getManufacturerByIdInt(Long id) {
+        return manufacturerRepository.findById(id);
+    }
         public Page<ManufacturerReturnDto> getAllManufacturer(Pageable pageable) {
         return manufacturerRepository.findAll(pageable).map(ManufacturerReturnDto::new);
         }
 
     public ResponseEntity<Manufacturer> attManufacturer(Long id, ManufacturerDto manufacturerDto) {
         Manufacturer manufacturerSave = manufacturerRepository.findById(id).orElseThrow();
-        String toUpperCase = manufacturerDto.getManufacturerName().toUpperCase();
-        Optional<Manufacturer> existManufacturer = manufacturerRepository.findByManufacturerName(toUpperCase);
         if (manufacturerDto.getCountry() != null) manufacturerSave.setCountry(manufacturerDto.getCountry());
-        if (existManufacturer.isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+
+        if (manufacturerDto.getManufacturerName() != null) {
+            String toUpperCase = manufacturerDto.getManufacturerName().toUpperCase();
+            Optional<Manufacturer> existManufacturer = manufacturerRepository.findByManufacturerName(toUpperCase);
+            if (existManufacturer.isPresent()){
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            }
+            manufacturerSave.setManufacturerName(toUpperCase);
         }
-        manufacturerSave.setManufacturerName(toUpperCase);
         return ResponseEntity.ok(manufacturerRepository.save(manufacturerSave));
     }
 

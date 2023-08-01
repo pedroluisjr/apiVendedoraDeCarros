@@ -39,19 +39,19 @@ public class Vehicle {
     @Column(name = "occupants")
     private int occupants;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
-    private Type typeName;
+    private Type typeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "color_id")
-    private Color colorName;
+    private Color colorId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manufacturer_id")
-    private Manufacturer manufacturerName;
+    private Manufacturer manufacturerId;
 
-    @Column(name = "createdAt")
+    @Column(name = "createdAt", updatable = false)
     @CreationTimestamp
     private Date createdAt;
 

@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -46,6 +47,10 @@ public class TypeService {
             return ResponseEntity.of(typeRepository.findById(id));
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    public Optional<Type> getTypeByIdInt(Long id) {
+        return typeRepository.findById(id);
     }
 
     public ResponseEntity<Type> attType(Long id, TypeDto typeDto) {

@@ -42,9 +42,8 @@ public class ColorService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    public Color getColorByIdInt(Long id) {
-        Optional<Color> existColor = colorRepository.findById(id);
-        return existColor.orElse(null);
+    public Optional<Color> getColorByIdInt(Long id) {
+        return colorRepository.findById(id);
     }
 
     public ResponseEntity<Color> attColor(Long id, ColorDto colorDto) {

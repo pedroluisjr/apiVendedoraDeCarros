@@ -11,6 +11,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequestMapping("/api/fabricante")
 @RestController
 public class ManufacturerController {
@@ -19,7 +21,7 @@ public class ManufacturerController {
     ManufacturerService manufacturerService;
 
     @PostMapping
-    public ResponseEntity<Manufacturer> addManufacturer(@RequestBody ManufacturerDto manufacturerDto){
+    public ResponseEntity<Manufacturer> addManufacturer(@Valid @RequestBody ManufacturerDto manufacturerDto){
         return manufacturerService.manufacturerAdd(manufacturerDto);
     }
 

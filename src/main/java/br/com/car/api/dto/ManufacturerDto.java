@@ -6,12 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ManufacturerDto {
 
+    @NotBlank
     private String manufacturerName;
+
+    @NotBlank
     private String country;
 
     public Manufacturer toManufacturer() {
