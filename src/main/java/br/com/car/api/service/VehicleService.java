@@ -68,4 +68,52 @@ public class VehicleService {
         }
     }
 
+    public ResponseEntity<Vehicle> deleteVehicle(Long id) {
+        Optional<Vehicle> vehicle = vehicleRepository.findById(id);
+        if (vehicle.isPresent()) {
+            vehicleRepository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    public ResponseEntity<Vehicle> attVechicle(Long id, VehicleDto vehicleDto) {
+        Vehicle vehicleSave = vehicleRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        if (vehicleDto.getModelName() != null) vehicleSave.setModelName(vehicleDto.getModelName());
+        if (vehicleDto.getFuelType() != null) vehicleSave.setFuelType(vehicleDto.getFuelType());
+        if (vehicleDto.getFabricationYear() != 0) vehicleSave.setFabricationYear(vehicleDto.getFabricationYear());
+        if (vehicleDto.getModel() != 0) vehicleSave.setModel(vehicleDto.getModel());
+        if (vehicleDto.getPlate() != null) vehicleSave.setPlate(vehicleDto.getPlate());
+        if (vehicleDto.getOccupants() != 0) vehicleSave.setOccupants(vehicleDto.getOccupants());
+
+        if (vehicleDto.getManufacturerId() != null) {
+            Optional<Manufacturer> manufacturer = manufacturerService.getManufacturerByIdInt(vehicleDto.getManufacturerId());
+            if (manufacturer.isPresent()) {
+                vehicleSave.setManufacturerId(manufacturer.get());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        }
+
+        if (vehicleDto.getColorId() != null) {
+            Optional<Color> color = colorService.getColorByIdInt(vehicleDto.getColorId());
+            if (color.isPresent()) {
+                vehicleSave.setColorId(color.get());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        }
+
+        if (vehicleDto.getTypeId() != null) {
+            Optional<Type> type = typeService.getTypeByIdInt(vehicleDto.getTypeId());
+            if (type.isPresent()) {
+                vehicleSave.setTypeId(type.get());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        }
+        vehicleRepository.save(vehicleSave);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 }

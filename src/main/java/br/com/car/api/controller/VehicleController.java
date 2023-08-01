@@ -33,4 +33,14 @@ public class VehicleController {
         return vehicleService.getVehicleById(id);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Vehicle> deleteVehicle(@PathVariable("id") Long id) {
+        return vehicleService.deleteVehicle(id);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Vehicle> attVehicle(@PathVariable("id") Long id, @RequestBody VehicleDto vehicleDto) {
+        return vehicleService.attVechicle(id, vehicleDto);
+    }
+
 }
