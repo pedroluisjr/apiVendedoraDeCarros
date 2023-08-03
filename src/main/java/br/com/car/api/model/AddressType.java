@@ -13,18 +13,18 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "type")
-public class Type {
+@Table(name = "addressType")
+public class AddressType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "typeId")
-    private Long typeId;
+    @Column(name = "addressTypeId")
+    private Long addressTypeId;
 
-    @Column(name = "typeName")
-    private String typeName;
+    @Column(name = "addressTypeName")
+    private String addressTypeName;
 
-    @Column(name = "createdAt")
+    @Column(name = "createdAt", updatable = false)
     @CreationTimestamp
     private Date createdAt;
 
