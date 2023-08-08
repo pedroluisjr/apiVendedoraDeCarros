@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,10 @@ public class AddressTypeService {
             return ResponseEntity.of(existId);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    public Optional<AddressType> getAddressTypeIdInt(Long id) {
+        return addressTypeRepository.findById(id);
     }
 
     public ResponseEntity<AddressType> deleteAddressType(Long id) {

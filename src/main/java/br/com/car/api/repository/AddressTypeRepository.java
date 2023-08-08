@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface AddressTypeRepository extends JpaRepository<AddressType, Long> {
 
     Optional<AddressType> findByAddressTypeName(String addressTypeName);
-
 }
