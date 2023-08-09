@@ -33,4 +33,14 @@ public class AddressController {
         return addressService.getAddressById(id);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Address> deleteAddress(@PathVariable("id") Long id) {
+        return addressService.deleteAddress(id);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Address> attAddress(@PathVariable("id") Long id, @RequestBody AddressDto addressDto) {
+        return addressService.attAddress(id, addressDto);
+    }
+
 }

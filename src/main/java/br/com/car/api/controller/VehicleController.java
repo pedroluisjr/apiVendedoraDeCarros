@@ -40,7 +40,7 @@ public class VehicleController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Vehicle> attVehicle(@PathVariable("id") Long id, @RequestBody VehicleDto vehicleDto) {
-        return vehicleService.attVechicle(id, vehicleDto);
+        return vehicleService.attVehicle(id, vehicleDto);
     }
 
 }

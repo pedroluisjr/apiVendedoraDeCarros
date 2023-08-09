@@ -78,7 +78,7 @@ public class VehicleService {
         }
     }
 
-    public ResponseEntity<Vehicle> attVechicle(Long id, VehicleDto vehicleDto) {
+    public ResponseEntity<Vehicle> attVehicle(Long id, VehicleDto vehicleDto) {
         Vehicle vehicleSave = vehicleRepository.findById(id).orElseThrow(NoSuchElementException::new);
         if (vehicleDto.getModelName() != null) vehicleSave.setModelName(vehicleDto.getModelName());
         if (vehicleDto.getFuelType() != null) vehicleSave.setFuelType(vehicleDto.getFuelType());
@@ -89,29 +89,17 @@ public class VehicleService {
 
         if (vehicleDto.getManufacturerId() != null) {
             Optional<Manufacturer> manufacturer = manufacturerService.getManufacturerByIdInt(vehicleDto.getManufacturerId());
-            if (manufacturer.isPresent()) {
-                vehicleSave.setManufacturerId(manufacturer.get());
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
+            manufacturer.ifPresent(vehicleSave::setManufacturerId);
         }
 
         if (vehicleDto.getColorId() != null) {
             Optional<Color> color = colorService.getColorByIdInt(vehicleDto.getColorId());
-            if (color.isPresent()) {
-                vehicleSave.setColorId(color.get());
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
+            color.ifPresent(vehicleSave::setColorId);
         }
 
         if (vehicleDto.getTypeId() != null) {
             Optional<Type> type = typeService.getTypeByIdInt(vehicleDto.getTypeId());
-            if (type.isPresent()) {
-                vehicleSave.setTypeId(type.get());
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
+            type.ifPresent(vehicleSave::setTypeId);
         }
         vehicleRepository.save(vehicleSave);
         return ResponseEntity.status(HttpStatus.CREATED).build();

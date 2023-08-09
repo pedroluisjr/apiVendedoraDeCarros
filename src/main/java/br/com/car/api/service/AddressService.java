@@ -48,4 +48,34 @@ public class AddressService {
         }
     }
 
+    public ResponseEntity<Address> deleteAddress(Long id) {
+        Optional<Address> existAddress = addressRepository.findById(id);
+        if (existAddress.isPresent()) {
+            addressRepository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    public ResponseEntity<Address> attAddress(Long id, AddressDto addressDto) {
+        Optional<Address> existAddress = addressRepository.findById(id);
+        if (existAddress.isPresent()) {
+            if (addressDto.getCep() != 0) existAddress.get().setCep(addressDto.getCep());
+            if (addressDto.getCity() != null) existAddress.get().setCity(addressDto.getCity());
+            if (addressDto.getState() != null) existAddress.get().setState(addressDto.getState());
+            if (addressDto.getNumber() != 0) existAddress.get().setNumber(addressDto.getNumber());
+            if (addressDto.getCountry() != null) existAddress.get().setCountry(addressDto.getCountry());
+            if (addressDto.getStreet() != null) existAddress.get().setStreet(addressDto.getStreet());
+
+            if (addressDto.getAddressTypeId() != null) {
+                Optional<AddressType> existType = addressTypeService.getAddressTypeIdInt(addressDto.getAddressTypeId());
+                existType.ifPresent(addressType -> existAddress.get().setAddressType(addressType));
+            }
+            addressRepository.save(existAddress.get());
+
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
 }

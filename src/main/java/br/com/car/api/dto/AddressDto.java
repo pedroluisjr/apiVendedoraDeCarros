@@ -1,17 +1,11 @@
 package br.com.car.api.dto;
 
 import br.com.car.api.model.Address;
-import br.com.car.api.model.AddressType;
-import br.com.car.api.model.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
