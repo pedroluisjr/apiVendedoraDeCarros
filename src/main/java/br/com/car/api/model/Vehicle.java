@@ -51,6 +51,9 @@ public class Vehicle {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturerId;
 
+    @OneToOne(mappedBy = "vehicle")
+    private Person person;
+
     @Column(name = "createdAt", updatable = false)
     @CreationTimestamp
     private Date createdAt;
