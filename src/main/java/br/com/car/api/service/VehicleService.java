@@ -68,6 +68,10 @@ public class VehicleService {
         }
     }
 
+    public Optional<Vehicle> getVehicleByIdInt(Long id) {
+        return vehicleRepository.findById(id);
+    }
+
     public ResponseEntity<Vehicle> deleteVehicle(Long id) {
         Optional<Vehicle> vehicle = vehicleRepository.findById(id);
         if (vehicle.isPresent()) {

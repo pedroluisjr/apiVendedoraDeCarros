@@ -48,6 +48,10 @@ public class AddressService {
         }
     }
 
+    public Optional<Address> getAddressByIdInt(Long id) {
+        return addressRepository.findById(id);
+    }
+
     public ResponseEntity<Address> deleteAddress(Long id) {
         Optional<Address> existAddress = addressRepository.findById(id);
         if (existAddress.isPresent()) {
