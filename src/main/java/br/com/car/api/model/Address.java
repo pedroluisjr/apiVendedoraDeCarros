@@ -43,9 +43,6 @@ public class Address {
     @JoinColumn(name = "addressType")
     private AddressType addressType;
 
-    @OneToOne(mappedBy = "address")
-    private Person person;
-
     @Column(name = "createdAt", updatable = false)
     @CreationTimestamp
     private Date createdAt;
