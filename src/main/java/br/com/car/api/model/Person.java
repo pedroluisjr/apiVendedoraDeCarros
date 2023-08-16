@@ -34,12 +34,12 @@ public class Person {
     @Column(name = "cnh")
     private int cnh;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", referencedColumnName = "addressId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "vehicle_id", referencedColumnName = "vehicleId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
     @Column(name = "createdAt", updatable = false)

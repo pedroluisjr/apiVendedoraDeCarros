@@ -28,7 +28,6 @@ public class PersonService {
     @Autowired
     VehicleService vehicleService;
 
-    //TODO; realizar as implementações dos métodos de pessoas.
     public ResponseEntity<Person> addPerson(PersonDto personDto) {
         Person person = personDto.toPerson();
         Optional<Person> findCnh = personRepository.findByCnh(personDto.getCnh());
@@ -66,7 +65,6 @@ public class PersonService {
         }
     }
 
-    //TODO: Falta realizar os testes de deleção.
     public ResponseEntity<Person> deleteById(Long id) {
         Optional<Person> existId = personRepository.findById(id);
 
@@ -76,6 +74,35 @@ public class PersonService {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    public ResponseEntity<Person> attPerson(Long id, PersonDto personDto) {
+        Optional<Person> existPerson = personRepository.findById(id);
+
+        if (existPerson.isPresent()) {
+
+            if (personDto.getPersonName() != null) existPerson.get().setPersonName(personDto.getPersonName());
+            if (personDto.getPersonSurname() != null) existPerson.get().setPersonSurname(personDto.getPersonSurname());
+            if (personDto.getCnh() != 0) existPerson.get().setCnh(personDto.getCnh());
+            if (personDto.getAge() != 0) existPerson.get().setAge(personDto.getAge());
+
+            if (personDto.getVehicleId() != null) {
+                Vehicle existVehicle = vehicleService.getVehicleByIdInt(personDto.getVehicleId()).orElseThrow(NoSuchElementException::new);
+                existPerson.get().setVehicle(existVehicle);
+            }
+
+            if (personDto.getAddressId() != null) {
+                Address existAddress = addressService.getAddressByIdInt(personDto.getAddressId()).orElseThrow(NoSuchElementException::new);
+                existPerson.get().setAddress(existAddress);
+            }
+
+            personRepository.save(existPerson.get());
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
     }
 
 }

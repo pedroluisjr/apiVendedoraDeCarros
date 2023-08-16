@@ -32,10 +32,14 @@ public class PersonController {
         return personService.getPersonById(id);
     }
 
-    //TODO: Falta realizar os testes de deleção.
     @DeleteMapping("/{id}")
     public ResponseEntity<Person> deletePersonById(@PathVariable("id") Long id) {
         return personService.deleteById(id);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Person> attPerson(@PathVariable("id") Long id, @RequestBody PersonDto personDto) {
+        return personService.attPerson(id, personDto);
     }
 
 }
